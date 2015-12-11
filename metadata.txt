@@ -9,7 +9,7 @@
 [general]
 name=TAB files to shapefile
 qgisMinimumVersion=2.0
-description=This plugin converts a whole tab files directory to shapefiles
+description=This plugin converts a whole tab vector files directory to shapefiles
 version=0.1
 author=Geo-Hyd/Antea Group
 email=robin.prest@anteagroup.com
