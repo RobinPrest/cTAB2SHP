@@ -16,8 +16,8 @@ email=robin.prest@anteagroup.com
 
 about=This plugin uses OGR2OGR to convert a whole directory from TAB features to shapefile.
 
-tracker=github
-repository=github
+tracker=https://github.com/RobinPrest/cTAB2SHP/issues
+repository=https://github.com/RobinPrest/cTAB2SHP
 # End of mandatory metadata
 
 # Recommended items:
@@ -28,7 +28,7 @@ repository=github
 # Tags are comma separated with spaces allowed
 tags=Mapinfo,TAB,SHP,convert
 
-homepage=github
+homepage=https://github.com/RobinPrest/cTAB2SHP
 category=Plugins
 icon=icon.png
 # experimental flag
