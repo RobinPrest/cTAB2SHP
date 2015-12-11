@@ -308,7 +308,8 @@ class cTAB2SHP:
         for i in range(0,len(self.dockwidget.lwTABFiles)):
             tabListAll.append(self.dockwidget.lwTABFiles.item(i).text())
 
-        #On récupère la liste des noms de fichiers sélectionnés
+        #On récupère la liste des noms (tabListSel)
+        #de fichiers sélectionnés (itemListSel)
         itemListSel = []
         tabListSel = []
         itemListSel = self.dockwidget.lwTABFiles.selectedItems()
@@ -316,7 +317,8 @@ class cTAB2SHP:
             mText = itemSel.text()
             tabListSel.append(mText)
 
-        #on crée tabListFinale (qui contient les noms des fichiers) en fonction de si c'est sélectionné ou pas
+        #on crée tabListFinale (qui contient les noms des fichiers) en fonction
+        #de l'état de sélection
         tabListFinale = []
         if itemListSel != []:
             tabListFinale = tabListSel
@@ -328,9 +330,11 @@ class cTAB2SHP:
 
         for itemTab in tabListFinale:
             tabListComplet.append("{}\{}".format(tabDir,itemTab))
-
         appel_ogr = ""
         progress = 0
+        self.dockwidget.progressBar.setMinimum(0)
+        self.dockwidget.progressBar.setMaximum(len(tabListFinale))
+
         for f in tabListComplet:
             driver_tab = ogr.GetDriverByName("MapInfo File")
             tab_tab = driver_tab.Open(f)
@@ -338,7 +342,6 @@ class cTAB2SHP:
             type_tab = layer_tab.GetGeomType()
 
             fichier_nom, fichier_extension = os.path.splitext(f)
-            print (fichier_extension)
             if str(type_tab) == '0':
                 appel_ogr = """ogr2ogr -overwrite -skipfailures -where "OGR_GEOMETRY='Polygon'" -f "ESRI Shapefile" "{fichier_nom}_polygon.shp" "{fichier_nom}{fichier_extension}" """.format(**locals())
                 print (appel_ogr)
@@ -353,22 +356,3 @@ class cTAB2SHP:
                 os.system(appel_ogr)
             progress = progress + 1
             self.dockwidget.progressBar.setValue(progress)
-
-
-
-
-        # cmd = ""
-        # progress = 0
-        # self.dockwidget.progressBar.setMinimum(0)
-        # self.dockwidget.progressBar.setMaximum(len(tabListComplet))
-
-        # for file in tabListComplet:
-            # filename, filextension = os.path.splitext(file)
-            # cmd = """ogr2ogr -overwrite -skipfailures -where "OGR_GEOMETRY='Polygon'" -f "ESRI Shapefile" {filename}_polygon.shp {filename}.tab -nlt POLYGON""".format(**locals())
-            # os.system(cmd)
-            # cmd = """ogr2ogr -overwrite -skipfailures -where "OGR_GEOMETRY='LineString'" -f "ESRI Shapefile" {filename}_linestring.shp {filename}.tab -nlt LINESTRING""".format(**locals())
-            # os.system(cmd)
-            # cmd = """ogr2ogr -overwrite -skipfailures -where "OGR_GEOMETRY='Point'" -f "ESRI Shapefile" {filename}_point.shp {filename}.tab -nlt POINT""".format(**locals())
-            # os.system(cmd)
-            # progress += 1
-            # self.dockwidget.progressBar.setValue(progress)
