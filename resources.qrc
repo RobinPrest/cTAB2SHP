@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/cTAB2SHP" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>
